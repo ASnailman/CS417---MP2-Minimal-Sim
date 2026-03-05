@@ -10,6 +10,8 @@ public class ResourceManager : MonoBehaviour
     public TextMeshProUGUI moneyText;
     public TextMeshProUGUI appleText;
 
+    public TextMeshProUGUI MiningBtnText;
+
     private void Awake()
     {
         Instance = this;
@@ -18,9 +20,15 @@ public class ResourceManager : MonoBehaviour
     private void Update()
     {
         if (moneyText != null) 
-            moneyText.text = $"Total Money: ${Mathf.FloorToInt(totalMoney)}";
+            moneyText.text = $"${Mathf.FloorToInt(totalMoney)}";
             
         if (appleText != null) 
-            appleText.text = $"Total Apples: {Mathf.FloorToInt(totalApples)}";
+            appleText.text = $"Apples: {Mathf.FloorToInt(totalApples)}";
+        
+        if (MiningBtnText != null)
+        {
+            float mining_rate = MiningGainMoney.getCurrentRate();
+            MiningBtnText.text = $"+${mining_rate}";
+        }
     }
 }
