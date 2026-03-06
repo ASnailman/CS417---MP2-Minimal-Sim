@@ -120,7 +120,7 @@ public class TreeBehaviour : MonoBehaviour
     {
         float applesGained = (8 + UpgradesManager.F_upgrades[3].level) * growth * (1 + UpgradesManager.F_upgrades[3].level * 0.02f); 
         // Harvest effectiveness is influenced by the 4th farming upgrade and total upgrade levels, providing a boost to apple yield
-        float HarvestEffectiveness = 1 + UpgradesManager.Instance.TotalUpgradeLevel * 0.005f;
+        float HarvestEffectiveness = 1 + UpgradesManager.Instance.TotalUpgradeLevel * 0.005f * UpgradesManager.F_upgrades[4].level;
         applesGained *= HarvestEffectiveness;
         ResourceManager.Instance.totalApples += Mathf.FloorToInt(applesGained);
         growth = 0f; 
