@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class UpgradeBtnClick : MonoBehaviour
 {
+
+    bool moneyTutorialShown = false;
+    bool appleTutorialShown = false;
+
+
     public void OnClick()
     {
         string upgradeName = gameObject.name.Replace("Btn", ""); // Assuming the button's name is like "Upgrade1Btn"
@@ -27,7 +32,14 @@ public class UpgradeBtnClick : MonoBehaviour
                             ResourceManager.Instance.totalMoney -= upgrade.baseCost * System.Math.Pow(upgrade.costMultiplier, upgrade.level);
                             upgrade.level++;
                             UpgradesManager.Instance.TotalUpgradeLevel++;
-                        }
+
+                        //Tutorial trigger for money upgrades
+                        if (upgradeName == "InterestScheme" && upgrade.level == 1 && !moneyTutorialShown)
+                            {
+                                FindObjectOfType<TutorialManager>().ShowMoneyTutorial();
+                                moneyTutorialShown = true;
+                            }
+                    }
                 }
                 break;
             }
@@ -53,7 +65,14 @@ public class UpgradeBtnClick : MonoBehaviour
                             ResourceManager.Instance.totalMoney -= upgrade.baseCost * System.Math.Pow(upgrade.costMultiplier, upgrade.level);
                             upgrade.level++;
                             UpgradesManager.Instance.TotalUpgradeLevel++;
-                        }
+
+                        //Tutorial trigger for apple growth upgrades
+                        if (upgradeName == "GardenPlots" && upgrade.level == 1 && !appleTutorialShown)
+                            {
+                                FindObjectOfType<TutorialManager>().ShowAppleTutorial();
+                                appleTutorialShown = true;
+                            }
+                    }
                 }
                 break;
             }
