@@ -29,7 +29,6 @@ public class TreeBehaviour : MonoBehaviour
         if (TreeID < GardenPlotNumbers) // Only grow if this tree is within the
         {
             TreeInfo.enabled = true;
-            waterButton.interactable = true;
             Renderer treeRenderer = gameObject.GetComponent<Renderer>();
             treeRenderer.enabled = true; // Ensure the tree model is visible when unlocked
         }
@@ -38,8 +37,6 @@ public class TreeBehaviour : MonoBehaviour
             // If the tree is not yet unlocked, ensure it's not visible and disable interactions
             growth = 0f;
             TreeInfo.enabled = false;
-            waterButton.interactable = false;
-            harvestButton.interactable = false;
             foreach (GameObject apple in apples)
             {
                 apple.SetActive(false);
@@ -85,7 +82,6 @@ public class TreeBehaviour : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 4f))
         {
-            Debug.Log($"Hit: {hit.collider.gameObject.name}");
             if (hit.collider.gameObject == this.gameObject)
             {
                 TreeInfo.enabled = true;
@@ -110,7 +106,7 @@ public class TreeBehaviour : MonoBehaviour
             growth += 0.1f * growthEffectiveness;
             if (growth > 1f) growth = 1f; // Cap growth at 100%
             waterButton.interactable = false; // Disable the button immediately after clicking
-            Invoke(nameof(EnableWaterButton), 3f); // Re-enable the button after 3 seconds
+            Invoke(nameof(EnableWaterButton), 0.5f); // Re-enable the button after 3 seconds
         }
         else
         {

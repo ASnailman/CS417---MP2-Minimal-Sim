@@ -34,7 +34,7 @@ public class ResourceManager : MonoBehaviour
         }
         if (waterText != null)
         {
-            waterText.text = $"Water: {Mathf.FloorToInt(water)} / {Mathf.FloorToInt((UpgradesManager.M_upgrades[1].level*0.1f + 1) * 100)}";
+            waterText.text = $"Water: {Mathf.FloorToInt(water)} / {Mathf.FloorToInt((UpgradesManager.F_upgrades[1].level*0.1f + 1) * 100)}";
         }
     }
 }

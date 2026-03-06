@@ -14,10 +14,10 @@ public class UpgradesManager : MonoBehaviour
     public Sprite AffordableUpgradeSprite;
     public Sprite UnaffordableUpgradeSprite;
 
-    private double[] miningBaseCosts = {20, 200, 1000, 7500};
+    private double[] miningBaseCosts = {20, 200, 1000, 40000};
     private double[] miningCostMultipliers = {1.05, 1.1, 1.15, 1.2};
-    private double[] farmingBaseCosts = {16000, 5, 100, 2000, 50000}; //Upgrades 2-5 are in Apples, not Money
-    private double[] farmingCostMultipliers = {9, 1.1, 1.15, 1.2, 1.25};
+    private double[] farmingBaseCosts = {16000, 5, 15, 50, 300}; //Upgrades 2-5 are in Apples, not Money
+    private double[] farmingCostMultipliers = {5, 1.1, 1.15, 1.2, 1.25};
     public class Upgrade
     {
         public string name;
@@ -137,6 +137,13 @@ public class UpgradesManager : MonoBehaviour
         for (int i=0; i < F_upgrades.Count; i++)
             {
                 Upgrade upgrade = F_upgrades[i];
+                if (F_upgrades[i].level >= F_upgrades[i].MaxLvl)
+                {
+                    upgrade.button.interactable = false; // Disable the button if max level is reached
+                    upgrade.buttonText.text = "MAX";
+                    upgrade.button.GetComponent<Image>().sprite = UnaffordableUpgradeSprite; // Set to unaffordable sprite
+                    continue; // Skip the rest of the loop for this upgrade
+                }
                 if (i == 0 || F_upgrades[i-1].level >= upgrade.RequiresPreviousLevel) // Check if the previous upgrade is at the required level
                 {
                     FarmingUpgrades[i].SetActive(true); // Ensure the upgrade is visible if it's unlocked
