@@ -10639,8 +10639,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21ce9db3b5ece0142840b1fe2e19960c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResourceManager
-  totalMoney: 1000000000
-  totalApples: 100000000
+  totalMoney: 0
+  totalApples: 0
   water: 0
   moneyText: {fileID: 1922467975}
   appleText: {fileID: 1284037345}
