@@ -14,30 +14,30 @@ public class UpgradesManager : MonoBehaviour
     public Sprite AffordableUpgradeSprite;
     public Sprite UnaffordableUpgradeSprite;
 
-    public GameObject[] Trees;
-    private float[] miningBaseCosts = {20f, 200f, 1000f, 7500f};
-    private float[] miningCostMultipliers = {1.05f, 1.1f, 1.15f, 1.2f};
-    private float[] farmingBaseCosts = {16000f, 128000f, 1024000f, 8192000f};
-    private float[] farmingCostMultipliers = {4f, 1.5f, 1.25f, 1.125f};
+    private double[] miningBaseCosts = {20, 200, 1000, 7500};
+    private double[] miningCostMultipliers = {1.05, 1.1, 1.15, 1.2};
+    private double[] farmingBaseCosts = {16000, 5, 100, 2000, 50000}; //Upgrades 2-5 are in Apples, not Money
+    private double[] farmingCostMultipliers = {9, 1.1, 1.15, 1.2, 1.25};
     public class Upgrade
     {
         public string name;
         public string description;
-        public float baseCost;
-        public float costMultiplier;
+        public double baseCost;
+        public double costMultiplier;
         public int level = 0;
         public int RequiresPreviousLevel = 10;
         public TextMeshProUGUI nameText;
         public TextMeshProUGUI descriptionText;
         public TextMeshProUGUI buttonText; // Reference to the button's TextMeshProUGUI component
 
+        public int MaxLvl = 999;
         public Button button;
     }
     
     public static List<Upgrade> M_upgrades = new List<Upgrade>(); 
     public static List<Upgrade> F_upgrades = new List<Upgrade>();
 
-
+    public int TotalUpgradeLevel = 0;
     void Start()
     {
         Instance = this;
@@ -67,6 +67,8 @@ public class UpgradesManager : MonoBehaviour
             upgrade.button = FarmingUpgrades[i].transform.Find(upgrade.name+"Btn").GetComponent<Button>();  
             F_upgrades.Add(upgrade);
         }
+        F_upgrades[0].MaxLvl = 5;
+        F_upgrades[1].RequiresPreviousLevel = 1;
     }
 
     // Update is called once per frame
@@ -75,9 +77,16 @@ public class UpgradesManager : MonoBehaviour
         for (int i = 0; i < M_upgrades.Count; i++)
         {
             Upgrade upgrade = M_upgrades[i];
+            if (M_upgrades[i].level >= M_upgrades[i].MaxLvl)
+            {
+                upgrade.button.interactable = false; // Disable the button if max level is reached
+                upgrade.buttonText.text = "MAX";
+                upgrade.button.GetComponent<Image>().sprite = UnaffordableUpgradeSprite; // Set to unaffordable sprite
+                continue; // Skip the rest of the loop for this upgrade
+            }
             if (i == 0 || M_upgrades[i-1].level >= upgrade.RequiresPreviousLevel) // Check if the previous upgrade is at the required level
             {
-                float cost = upgrade.baseCost * Mathf.Pow(upgrade.costMultiplier, upgrade.level);
+                double cost = upgrade.baseCost * System.Math.Pow(upgrade.costMultiplier, upgrade.level);
                 upgrade.button.GetComponent<Image>().sprite = AffordableUpgradeSprite;
                 upgrade.nameText.text = $"{upgrade.name} Lv.{upgrade.level}";
                 if (i == 0)
@@ -88,11 +97,15 @@ public class UpgradesManager : MonoBehaviour
                 {
                     upgrade.descriptionText.text = $"{upgrade.description}\n+ {upgrade.level * 10} -> {(upgrade.level + 1) * 10}";
                 }
-                else if (i == 2 || i == 3)
+                else if (i == 2)
                 {
-                    upgrade.descriptionText.text = $"{upgrade.description}\n+ {upgrade.level}% -> {upgrade.level+1}%";
+                    upgrade.descriptionText.text = $"{upgrade.description}\n+ {upgrade.level * 2}% -> {upgrade.level * 2 + 2}%";
                 }
-                upgrade.buttonText.text = $"${Mathf.FloorToInt(cost)}";
+                else if (i == 3)
+                {
+                    upgrade.descriptionText.text = $"{upgrade.description}\n+ {upgrade.level * 4}% -> {(upgrade.level + 1) * 4}%";
+                }
+                upgrade.buttonText.text = $"${System.Math.Floor(cost)}";
                 if (ResourceManager.Instance.totalMoney >= cost)
                 {
                     upgrade.button.interactable = true; // Enable the button if affordable
@@ -126,25 +139,49 @@ public class UpgradesManager : MonoBehaviour
                 Upgrade upgrade = F_upgrades[i];
                 if (i == 0 || F_upgrades[i-1].level >= upgrade.RequiresPreviousLevel) // Check if the previous upgrade is at the required level
                 {
-                    float cost = upgrade.baseCost * Mathf.Pow(upgrade.costMultiplier, upgrade.level);
+                    FarmingUpgrades[i].SetActive(true); // Ensure the upgrade is visible if it's unlocked
+                    double cost = upgrade.baseCost * System.Math.Pow(upgrade.costMultiplier, upgrade.level);
                     upgrade.button.GetComponent<Image>().sprite = AffordableUpgradeSprite;
                     upgrade.nameText.text = $"{upgrade.name} Lv.{upgrade.level}";
                     upgrade.descriptionText.text = $"{upgrade.description}\n+ {upgrade.level} -> {upgrade.level+1}";
-                    if (i == 2 || i == 3)
+                    if (i == 1)
                     {
-                        upgrade.descriptionText.text = $"{upgrade.description}\n+ {upgrade.level}% -> {upgrade.level+1}%";
+                        upgrade.descriptionText.text = $"{upgrade.description}\n+ {10 * upgrade.level}% -> {10 * (upgrade.level + 1)}%";
                     }
-                    upgrade.buttonText.text = $"${Mathf.FloorToInt(cost)}";
-                    if (ResourceManager.Instance.totalMoney >= cost)
-                    {
-                        upgrade.button.interactable = true; // Enable the button if affordable
-                        upgrade.buttonText.color = Color.black; // Affordable
+                    else if (i ==2){
+                        upgrade.descriptionText.text = $"{upgrade.description}\n+ {upgrade.level * 0.05f * 100}% -> {(upgrade.level + 1) * 0.05f * 100}%";
                     }
-                    else
-                    {
-
-                        upgrade.buttonText.color = Color.red; // Unaffordable
-                        upgrade.button.interactable = false; // Disable the button if unaffordable
+                     else if (i ==3){
+                        upgrade.descriptionText.text = $"{upgrade.description} + {upgrade.level} -> {upgrade.level + 1} and + {upgrade.level * 0.02f * 100}% -> {(upgrade.level + 1) * 0.02f * 100}%";
+                    }
+                     else if (i ==4){
+                        upgrade.descriptionText.text = $"{upgrade.description}\n+ {upgrade.level * 0.05f * 100}% -> {(upgrade.level + 1) * 0.05f * 100}%";
+                    }
+                    if (i == 0){
+                        upgrade.buttonText.text = $"${System.Math.Floor(cost)}";
+                        if (ResourceManager.Instance.totalMoney >= cost)
+                        {
+                            upgrade.button.interactable = true; // Enable the button if affordable
+                            upgrade.buttonText.color = Color.black; // Affordable
+                        }
+                        else
+                        {
+                            upgrade.buttonText.color = Color.red; // Unaffordable
+                            upgrade.button.interactable = false; // Disable the button if unaffordable
+                        }
+                    }
+                    else{
+                        upgrade.buttonText.text = $"{System.Math.Floor(cost)} Apples";
+                        if (ResourceManager.Instance.totalApples >= System.Math.Floor(cost))
+                        {
+                            upgrade.button.interactable = true; // Enable the button if affordable
+                            upgrade.buttonText.color = Color.black; // Affordable
+                        }
+                        else
+                        {
+                            upgrade.buttonText.color = Color.red; // Unaffordable
+                            upgrade.button.interactable = false; // Disable the button if unaffordable
+                        }
                     }
                 }
                 else

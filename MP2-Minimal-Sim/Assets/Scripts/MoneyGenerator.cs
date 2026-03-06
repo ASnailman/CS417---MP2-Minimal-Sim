@@ -4,18 +4,19 @@ using TMPro;
 public class MoneyGenerator : MonoBehaviour
 {
 
-    public float baserate = 1.0f;
+    public double baserate = 1.0;
     // Update is called once per frame
-    public float getCurrentRate()
+    public double getCurrentRate()
     {
-        float currentRate = baserate;
-        currentRate += UpgradesManager.M_upgrades[0].level * 1f; // Example: Each level of the first mining upgrade adds 1 to the rate
-        currentRate *= 1 + (UpgradesManager.M_upgrades[3].level * 0.04f * ResourceManager.Instance.totalApples * 0.01f); 
+        double currentRate = baserate;
+        currentRate += UpgradesManager.M_upgrades[0].level * 1.0; 
+        currentRate *= 1 + UpgradesManager.M_upgrades[2].level * 0.02;
+        currentRate *= 1 + (UpgradesManager.M_upgrades[3].level * 0.04 * ResourceManager.Instance.totalApples * 0.01); 
         return currentRate;
     }
     void Update()
     {
-        float moneyGained = getCurrentRate() * Time.deltaTime;
+        double moneyGained = getCurrentRate() * Time.deltaTime;
         ResourceManager.Instance.totalMoney += moneyGained;
     }
 }

@@ -4,11 +4,13 @@ using TMPro;
 public class ResourceManager : MonoBehaviour
 {
     public static ResourceManager Instance;
-    public float totalMoney = 0f;
-    public float totalApples = 0f;
+    public double totalMoney = 0;
+    public int totalApples = 0;
 
+    public float water = 0f;
     public TextMeshProUGUI moneyText;
     public TextMeshProUGUI appleText;
+    public TextMeshProUGUI waterText;
 
     public TextMeshProUGUI MiningBtnText;
 
@@ -20,15 +22,19 @@ public class ResourceManager : MonoBehaviour
     private void Update()
     {
         if (moneyText != null) 
-            moneyText.text = $"${Mathf.FloorToInt(totalMoney)}";
+            moneyText.text = $"${System.Math.Floor(totalMoney)}";
             
         if (appleText != null) 
-            appleText.text = $"Apples: {Mathf.FloorToInt(totalApples)}";
+            appleText.text = $"Apples: {totalApples}";
         
         if (MiningBtnText != null)
         {
-            float mining_rate = MiningGainMoney.getCurrentRate();
+            double mining_rate = MiningGainMoney.getCurrentRate();
             MiningBtnText.text = $"+${mining_rate}";
+        }
+        if (waterText != null)
+        {
+            waterText.text = $"Water: {Mathf.FloorToInt(water)} / {Mathf.FloorToInt((UpgradesManager.M_upgrades[1].level*0.1f + 1) * 100)}";
         }
     }
 }

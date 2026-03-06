@@ -5,7 +5,7 @@ public class MiningGainMoney : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public static MiningGainMoney Instance;
-    public float baseRate = 100f;
+    public double baseRate = 1.0;
 
     public TextMeshProUGUI UICanvasMessageText;
     public Button mineButton;
@@ -14,21 +14,21 @@ public class MiningGainMoney : MonoBehaviour
         Instance = this;
     }
 
-    public static float getCurrentRate()
+    public static double getCurrentRate()
     {
-        float currentRate = Instance.baseRate;
-        currentRate += UpgradesManager.M_upgrades[1].level * 10f;
-        currentRate *= 1 + UpgradesManager.M_upgrades[2].level * 0.01f;
-        currentRate *= 1 + (UpgradesManager.M_upgrades[3].level * 0.04f * ResourceManager.Instance.totalApples * 0.01f);
+        double currentRate = Instance.baseRate;
+        currentRate += UpgradesManager.M_upgrades[1].level * 10;
+        currentRate *= 1 + UpgradesManager.M_upgrades[2].level * 0.02;
+        currentRate *= 1 + (UpgradesManager.M_upgrades[3].level * 0.04 * ResourceManager.Instance.totalApples * 0.01);
         return currentRate;
     }
 
     public void Mine()
     {
-        float moneyGained = getCurrentRate();
+        double moneyGained = getCurrentRate();
         float DoubleDrop = Random.Range(0f, 1f);
         bool flgDoubleDrop = false;
-        if (DoubleDrop <= UpgradesManager.M_upgrades[2].level * 0.01f)
+        if (DoubleDrop <= UpgradesManager.M_upgrades[2].level * 0.02f)
         {
             moneyGained *= 2; 
             flgDoubleDrop = true;
@@ -53,6 +53,6 @@ public class MiningGainMoney : MonoBehaviour
     }
     void Update()
     {
-        mineButton.transform.Find("MiningAreaBtnTxt").GetComponent<TextMeshProUGUI>().text = $"+${Mathf.FloorToInt(getCurrentRate())}";
+        mineButton.transform.Find("MiningAreaBtnTxt").GetComponent<TextMeshProUGUI>().text = $"+${System.Math.Floor(getCurrentRate())}";
     }
 }
