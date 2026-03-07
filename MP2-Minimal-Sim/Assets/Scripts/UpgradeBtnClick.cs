@@ -2,81 +2,90 @@ using UnityEngine;
 
 public class UpgradeBtnClick : MonoBehaviour
 {
-
     bool moneyTutorialShown = false;
     bool appleTutorialShown = false;
 
-
-    public void OnClick()
+    public void OnClick() //
     {
-        string upgradeName = gameObject.name.Replace("Btn", ""); // Assuming the button's name is like "Upgrade1Btn"
-        Debug.Log("Button clicked!");
+        // Safety check: Ensure UpgradesManager is initialized
+        if (UpgradesManager.M_upgrades == null || UpgradesManager.F_upgrades == null)
+        {
+            Debug.LogWarning("Upgrades lists not yet initialized!");
+            return;
+        }
+
+        string upgradeName = gameObject.name.Replace("Btn", ""); 
+        Debug.Log("Button clicked: " + upgradeName);
+
+        // Check Mining Upgrades
         foreach (var upgrade in UpgradesManager.M_upgrades)
         {
             if (upgrade.name == upgradeName)
             {
-                if (upgradeName == "GrowthSpeed" || upgradeName == "IncreasedYield" || upgradeName == "StrengthenedSynergy") // These upgrades are in Apples, not Money
-                {
-                    if (ResourceManager.Instance.totalApples >= System.Math.Floor(upgrade.baseCost * System.Math.Pow(upgrade.costMultiplier, upgrade.level)))
-                    {
-                        ResourceManager.Instance.totalApples -= (int)(upgrade.baseCost * System.Math.Pow(upgrade.costMultiplier, upgrade.level));
-                        upgrade.level++;
-                        UpgradesManager.Instance.TotalUpgradeLevel++;
-                    }
-                }
-                else
-                {
-                    
-                    if (ResourceManager.Instance.totalMoney >= upgrade.baseCost * System.Math.Pow(upgrade.costMultiplier, upgrade.level))
-                        {
-                            ResourceManager.Instance.totalMoney -= upgrade.baseCost * System.Math.Pow(upgrade.costMultiplier, upgrade.level);
-                            upgrade.level++;
-                            UpgradesManager.Instance.TotalUpgradeLevel++;
-
-                        //Tutorial trigger for money upgrades
-                        if (upgradeName == "InterestScheme" && upgrade.level == 1 && !moneyTutorialShown)
-                            {
-                                FindObjectOfType<TutorialManager>().ShowMoneyTutorial();
-                                moneyTutorialShown = true;
-                            }
-                    }
-                }
-                break;
+                ProcessUpgrade(upgrade, true); // Mining upgrades always use Money
+                return; // Found and processed, exit function
             }
         }
+
+        // Check Farming Upgrades
         foreach (var upgrade in UpgradesManager.F_upgrades)
         {
             if (upgrade.name == upgradeName)
             {
-                if (upgradeName == "GrowthSpeed" || upgradeName == "IncreasedYield" || upgradeName == "StrengthenedSynergy" || upgradeName == "LargerBucket") // These upgrades are in Apples, not Money
-                {
-                    if (ResourceManager.Instance.totalApples >= System.Math.Floor(upgrade.baseCost * System.Math.Pow(upgrade.costMultiplier, upgrade.level)))
-                    {
-                        ResourceManager.Instance.totalApples -= (int)(upgrade.baseCost * System.Math.Pow(upgrade.costMultiplier, upgrade.level));
-                        upgrade.level++;
-                        UpgradesManager.Instance.TotalUpgradeLevel++;
-                    }
-                }
-                else
-                {
-                    
-                    if (ResourceManager.Instance.totalMoney >= upgrade.baseCost * System.Math.Pow(upgrade.costMultiplier, upgrade.level))
-                        {
-                            ResourceManager.Instance.totalMoney -= upgrade.baseCost * System.Math.Pow(upgrade.costMultiplier, upgrade.level);
-                            upgrade.level++;
-                            UpgradesManager.Instance.TotalUpgradeLevel++;
+                // Logic to determine if this farming upgrade costs Apples or Money
+                bool costsApples = (upgradeName == "GrowthSpeed" || 
+                                    upgradeName == "IncreasedYield" || 
+                                    upgradeName == "StrengthenedSynergy" || 
+                                    upgradeName == "LargerBucket");
 
-                        //Tutorial trigger for apple growth upgrades
-                        if (upgradeName == "GardenPlots" && upgrade.level == 1 && !appleTutorialShown)
-                            {
-                                FindObjectOfType<TutorialManager>().ShowAppleTutorial();
-                                appleTutorialShown = true;
-                            }
-                    }
-                }
-                break;
+                ProcessUpgrade(upgrade, !costsApples);
+                return;
             }
         }
     }
 
+    private void ProcessUpgrade(UpgradesManager.Upgrade upgrade, bool usesMoney) //
+    {
+        double cost = upgrade.baseCost * System.Math.Pow(upgrade.costMultiplier, upgrade.level);
+
+        if (usesMoney)
+        {
+            if (ResourceManager.Instance.totalMoney >= cost)
+            {
+                ResourceManager.Instance.totalMoney -= cost;
+                FinalizeUpgrade(upgrade);
+
+                // Tutorial trigger for money upgrades
+                if (upgrade.name == "InterestScheme" && upgrade.level == 1 && !moneyTutorialShown)
+                {
+                    var tutorial = FindFirstObjectByType<TutorialManager>();
+                    if (tutorial != null) tutorial.ShowMoneyTutorial();
+                    moneyTutorialShown = true;
+                }
+            }
+        }
+        else
+        {
+            if (ResourceManager.Instance.totalApples >= (int)cost)
+            {
+                ResourceManager.Instance.totalApples -= (int)cost;
+                FinalizeUpgrade(upgrade);
+
+                // Tutorial trigger for apple growth upgrades
+                if (upgrade.name == "GardenPlots" && upgrade.level == 1 && !appleTutorialShown)
+                {
+                    var tutorial = FindFirstObjectByType<TutorialManager>();
+                    if (tutorial != null) tutorial.ShowAppleTutorial();
+                    appleTutorialShown = true;
+                }
+            }
+        }
+    }
+
+    private void FinalizeUpgrade(UpgradesManager.Upgrade upgrade) //
+    {
+        upgrade.level++;
+        UpgradesManager.Instance.TotalUpgradeLevel++;
+        Debug.Log($"{upgrade.name} upgraded to level {upgrade.level}");
+    }
 }

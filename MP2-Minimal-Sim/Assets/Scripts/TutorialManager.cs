@@ -5,53 +5,37 @@ public class TutorialManager : MonoBehaviour
     public GameObject moneyTutorialPanel;
     public GameObject appleTutorialPanel;
 
-    private bool waitForMouseRelease = false;
+    public float autoHideDelay = 3.5f;
 
     public void ShowMoneyTutorial()
     {
+        if (moneyTutorialPanel == null) return;
+        
         moneyTutorialPanel.SetActive(true);
-        waitForMouseRelease = true;
+        Invoke(nameof(CloseMoneyTutorial), autoHideDelay);
     }
 
     public void ShowAppleTutorial()
     {
+        if (appleTutorialPanel == null) return;
+
         appleTutorialPanel.SetActive(true);
-        waitForMouseRelease = true;
+        Invoke(nameof(CloseAppleTutorial), autoHideDelay);
     }
 
     public void CloseMoneyTutorial()
     {
-        moneyTutorialPanel.SetActive(false);
+        if (moneyTutorialPanel != null)
+            moneyTutorialPanel.SetActive(false);
     }
 
     public void CloseAppleTutorial()
     {
-        appleTutorialPanel.SetActive(false);
+        if (appleTutorialPanel != null)
+            appleTutorialPanel.SetActive(false);
     }
 
     void Update()
     {
-        bool anyTutorialOpen =
-            moneyTutorialPanel != null && moneyTutorialPanel.activeSelf ||
-            appleTutorialPanel != null && appleTutorialPanel.activeSelf;
-
-        if (!anyTutorialOpen) return;
-
-      
-        if (waitForMouseRelease)
-        {
-            if (!Input.GetMouseButton(0))
-            {
-                waitForMouseRelease = false;
-            }
-            return;
-        }
-
-        
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (moneyTutorialPanel != null) moneyTutorialPanel.SetActive(false);
-            if (appleTutorialPanel != null) appleTutorialPanel.SetActive(false);
-        }
     }
 }

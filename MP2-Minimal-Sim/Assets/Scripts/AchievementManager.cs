@@ -5,16 +5,14 @@ public class AchievementManager : MonoBehaviour
 {
     public GameObject achievementPopupPanel;
     public TextMeshProUGUI achievementPopupText;
-
     public TextMeshProUGUI achievementListText;
 
-    public int moneyGoal = 1000000;          // For testing set to 100 
-    public int appleGoal = 1000000;          // For testing set to 100 
-    public int winUpgradeGoal = 10;       // Trying to setup a winning condition here. For testing set to 5
-    public float speedrunTimeLimit = 300f; // 5 minutes limit
+    public int moneyGoal = 1000000;          
+    public int appleGoal = 1000000;          
+    public int winUpgradeGoal = 10;       
+    public float speedrunTimeLimit = 300f; 
 
     private float startTime;
-
     private bool millionaireUnlocked = false;
     private bool appleFanaticUnlocked = false;
     private bool appleObsessionUnlocked = false;
@@ -24,7 +22,6 @@ public class AchievementManager : MonoBehaviour
     void Start()
     {
         startTime = Time.time;
-
         if (achievementPopupPanel != null)
             achievementPopupPanel.SetActive(false);
 
@@ -34,6 +31,10 @@ public class AchievementManager : MonoBehaviour
 
     void Update()
     {
+        // Safety Check: If Managers aren't ready yet, skip this frame to prevent crashing
+        if (ResourceManager.Instance == null || UpgradesManager.Instance == null) 
+            return;
+
         CheckMillionaire();
         CheckAppleFanatic();
         CheckAppleObsession();
@@ -41,6 +42,7 @@ public class AchievementManager : MonoBehaviour
 
     void CheckMillionaire()
     {
+        // Now safe because of the null check in Update
         if (!millionaireUnlocked && ResourceManager.Instance.totalMoney >= moneyGoal)
         {
             millionaireUnlocked = true;
@@ -61,8 +63,8 @@ public class AchievementManager : MonoBehaviour
     {
         float elapsed = Time.time - startTime;
 
-        if (!appleObsessionUnlocked &&
-            elapsed <= speedrunTimeLimit &&
+        if (!appleObsessionUnlocked && 
+            elapsed <= speedrunTimeLimit && appleFanaticUnlocked &&
             UpgradesManager.Instance.TotalUpgradeLevel >= winUpgradeGoal)
         {
             appleObsessionUnlocked = true;
