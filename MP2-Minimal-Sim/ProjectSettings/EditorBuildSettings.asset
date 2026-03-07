@@ -4,7 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/XinyiScene.unity
+    guid: dab658cfe556ac743bf294b445bf612f
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: fcf2a9841c195f94e8acaec66887840d, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: a84810fdfce48e7418d872098d5f512a, type: 2}
