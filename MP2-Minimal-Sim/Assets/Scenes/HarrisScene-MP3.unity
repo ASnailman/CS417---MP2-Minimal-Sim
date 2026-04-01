@@ -24977,8 +24977,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7c135fde68cbe4fa264cdedd2714ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradesManager
-  MiningUpgrades: []
-  FarmingUpgrades: []
+  MiningUpgrades:
+  - {fileID: 1397624813}
+  - {fileID: 898047590}
+  - {fileID: 1680300735}
+  - {fileID: 1813832530}
+  FarmingUpgrades:
+  - {fileID: 1806105790}
+  - {fileID: 1011135809}
+  - {fileID: 2018557131}
+  - {fileID: 917400566}
+  - {fileID: 1948577306}
   AffordableUpgradeSprite: {fileID: 0}
   UnaffordableUpgradeSprite: {fileID: 0}
   TotalUpgradeLevel: 0
@@ -26717,7 +26726,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
