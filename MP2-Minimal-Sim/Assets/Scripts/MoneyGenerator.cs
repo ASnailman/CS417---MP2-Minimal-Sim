@@ -1,9 +1,15 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics; 
 
 public class MoneyGenerator : MonoBehaviour
 {
     public double baserate = 1.0;
+    private float particles = 0f;
+    public ParticleSystem moneyParticles;
+    public AudioSource moneySound;
+    public HapticImpulsePlayer leftHaptic;
+    public HapticImpulsePlayer rightHaptic;
 
     public double getCurrentRate() //
     {
@@ -25,5 +31,24 @@ public class MoneyGenerator : MonoBehaviour
         if (ResourceManager.Instance == null) return;
         double moneyGained = getCurrentRate() * Time.deltaTime;
         ResourceManager.Instance.totalMoney += moneyGained;
+
+        particles += (float) moneyGained;
+        if (particles >= 1.0f) {
+            TriggerParticle();
+            particles = 0f;
+        }
+    }
+
+    void TriggerParticle()
+    {
+        if (moneyParticles != null) {
+            moneyParticles.Emit(5);
+        }
+         if (moneySound != null) {
+            moneySound.Play();
+        }
+        
+        leftHaptic?.SendHapticImpulse(0.5f, 0.1f);
+        rightHaptic?.SendHapticImpulse(0.5f, 0.1f);
     }
 }
