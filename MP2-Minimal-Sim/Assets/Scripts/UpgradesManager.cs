@@ -10,6 +10,12 @@ public class UpgradesManager : MonoBehaviour
     public GameObject[] MiningUpgrades;
     public GameObject[] FarmingUpgrades;
 
+    public TextMeshProUGUI appleText;
+    public TextMeshProUGUI waterText;
+    public EaseIn appleTextEase;
+    public EaseIn waterTextEase;
+    public AudioSource firstUnlockAudioSource;
+
     public Sprite AffordableUpgradeSprite;
     public Sprite UnaffordableUpgradeSprite;
 
@@ -37,6 +43,9 @@ public class UpgradesManager : MonoBehaviour
     public static List<Upgrade> F_upgrades = new List<Upgrade>();
 
     public int TotalUpgradeLevel = 0;
+    private bool farmResourceUiUnlocked = false;
+    private bool[] miningUnlockSfxPlayed;
+    private bool[] farmingUnlockSfxPlayed;
 
     private void Awake() //
     {
@@ -60,6 +69,8 @@ public class UpgradesManager : MonoBehaviour
             M_upgrades.Add(upgrade);
         }
 
+        miningUnlockSfxPlayed = new bool[MiningUpgrades.Length];
+
         for (int i = 0; i < FarmingUpgrades.Length; i++)
         {
             Upgrade upgrade = new Upgrade();
@@ -74,10 +85,22 @@ public class UpgradesManager : MonoBehaviour
             F_upgrades.Add(upgrade);
         }
 
+        farmingUnlockSfxPlayed = new bool[FarmingUpgrades.Length];
+
         if (F_upgrades.Count > 1)
         {
             F_upgrades[0].MaxLvl = 5;
             F_upgrades[1].RequiresPreviousLevel = 1;
+        }
+
+        if (appleTextEase == null && appleText != null)
+        {
+            appleTextEase = appleText.GetComponent<EaseIn>();
+        }
+
+        if (waterTextEase == null && waterText != null)
+        {
+            waterTextEase = waterText.GetComponent<EaseIn>();
         }
     }
 
@@ -92,6 +115,14 @@ public class UpgradesManager : MonoBehaviour
         for (int i = 0; i < M_upgrades.Count; i++)
         {
             Upgrade upgrade = M_upgrades[i];
+            bool isUnlocked = i == 0 || M_upgrades[i-1].level >= upgrade.RequiresPreviousLevel;
+
+            if (i > 0 && isUnlocked && !miningUnlockSfxPlayed[i])
+            {
+                PlayFirstUnlockSfx();
+                miningUnlockSfxPlayed[i] = true;
+            }
+
             if (M_upgrades[i].level >= M_upgrades[i].MaxLvl)
             {
                 upgrade.button.interactable = false;
@@ -99,7 +130,7 @@ public class UpgradesManager : MonoBehaviour
                 upgrade.button.GetComponent<Image>().sprite = UnaffordableUpgradeSprite;
                 continue;
             }
-            if (i == 0 || M_upgrades[i-1].level >= upgrade.RequiresPreviousLevel)
+            if (isUnlocked)
             {
                 double cost = upgrade.baseCost * System.Math.Pow(upgrade.costMultiplier, upgrade.level);
                 upgrade.button.GetComponent<Image>().sprite = AffordableUpgradeSprite;
@@ -133,6 +164,14 @@ public class UpgradesManager : MonoBehaviour
         for (int i=0; i < F_upgrades.Count; i++)
         {
             Upgrade upgrade = F_upgrades[i];
+            bool isUnlocked = i == 0 || F_upgrades[i-1].level >= upgrade.RequiresPreviousLevel;
+
+            if (i > 0 && isUnlocked && !farmingUnlockSfxPlayed[i])
+            {
+                PlayFirstUnlockSfx();
+                farmingUnlockSfxPlayed[i] = true;
+            }
+
             if (F_upgrades[i].level >= F_upgrades[i].MaxLvl)
             {
                 upgrade.button.interactable = false;
@@ -140,7 +179,7 @@ public class UpgradesManager : MonoBehaviour
                 upgrade.button.GetComponent<Image>().sprite = UnaffordableUpgradeSprite;
                 continue;
             }
-            if (i == 0 || F_upgrades[i-1].level >= upgrade.RequiresPreviousLevel)
+            if (isUnlocked)
             {
                 FarmingUpgrades[i].SetActive(true);
                 double cost = upgrade.baseCost * System.Math.Pow(upgrade.costMultiplier, upgrade.level);
@@ -175,5 +214,34 @@ public class UpgradesManager : MonoBehaviour
                 upgrade.button.interactable = false;
             }
         }
+        if (F_upgrades[0].level >= 1)
+        {
+            if (appleText != null)
+            {
+                appleText.gameObject.SetActive(true);
+            }
+
+            if (waterText != null)
+            {
+                waterText.gameObject.SetActive(true);
+            }
+
+            if (!farmResourceUiUnlocked)
+            {
+                farmResourceUiUnlocked = true;
+                appleTextEase?.Pulse();
+                waterTextEase?.Pulse();
+            }
+        }
+    }
+
+    private void PlayFirstUnlockSfx()
+    {
+        if (firstUnlockAudioSource == null)
+        {
+            return;
+        }
+
+        firstUnlockAudioSource.Play();
     }
 }

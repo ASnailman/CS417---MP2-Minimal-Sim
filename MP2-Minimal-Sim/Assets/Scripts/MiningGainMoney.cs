@@ -35,6 +35,11 @@ public class MiningGainMoney : MonoBehaviour
         currentRate += UpgradesManager.M_upgrades[1].level * 10;
         currentRate *= 1 + UpgradesManager.M_upgrades[2].level * 0.02;
         currentRate *= 1 + (UpgradesManager.M_upgrades[3].level * 0.04 * ResourceManager.Instance.totalApples * 0.01);
+        if (MoneySurge.Instance != null)
+        {
+            currentRate *= MoneySurge.Instance.GetCurrentMultiplier();
+        }
+
         return currentRate;
     }
 

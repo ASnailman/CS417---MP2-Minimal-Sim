@@ -1,15 +1,22 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics;
+using TMPro;
+using System.Collections;
 
 public class UpgradeBtnClick : MonoBehaviour
 {
     bool moneyTutorialShown = false;
     bool appleTutorialShown = false;
+    private Coroutine costEaseCoroutine;
 
-    public AudioSource clickSound;
+    [SerializeField] private float costEaseDuration = 0.2f;
+
+    public AudioSource upgradeSound;
+    public AudioSource GardenPlotSound;
     public HapticImpulsePlayer leftHaptic;
     public HapticImpulsePlayer rightHaptic;
 
+    public ParticleSystem upgradeParticles;
     public void OnClick() //
     {
         // Safety check: Ensure UpgradesManager is initialized
@@ -18,14 +25,6 @@ public class UpgradeBtnClick : MonoBehaviour
             Debug.LogWarning("Upgrades lists not yet initialized!");
             return;
         }
-
-        // Juicy Effect
-        if (clickSound != null) {
-            clickSound.volume = 0.5f;
-            clickSound.Play();
-        }
-        leftHaptic?.SendHapticImpulse(0.5f, 0.1f);
-        rightHaptic?.SendHapticImpulse(0.5f, 0.1f);
 
         string upgradeName = gameObject.name.Replace("Btn", ""); 
         Debug.Log("Button clicked: " + upgradeName);
@@ -97,8 +96,90 @@ public class UpgradeBtnClick : MonoBehaviour
 
     private void FinalizeUpgrade(UpgradesManager.Upgrade upgrade) //
     {
+        double previousCost = upgrade.baseCost * System.Math.Pow(upgrade.costMultiplier, upgrade.level);
         upgrade.level++;
         UpgradesManager.Instance.TotalUpgradeLevel++;
         Debug.Log($"{upgrade.name} upgraded to level {upgrade.level}");
+        if (upgradeSound != null)
+        {
+            upgradeSound.volume = 1f;
+            if (upgrade.name == "GardenPlots" && GardenPlotSound != null)
+            {
+                GardenPlotSound.transform.position = transform.position; // Move sound to button position
+                GardenPlotSound.volume = 1f;
+                GardenPlotSound.Play();
+            }
+            else
+            {
+                upgradeSound.Play();
+            }
+        }
+        leftHaptic?.SendHapticImpulse(0.5f, 0.1f);
+        rightHaptic?.SendHapticImpulse(0.5f, 0.1f);
+        if (upgradeParticles != null)
+        {
+            upgradeParticles.transform.position = transform.position; // Move particle system to button position
+            upgradeParticles.Emit(1);
+        }
+        double nextCost = upgrade.baseCost * System.Math.Pow(upgrade.costMultiplier, upgrade.level);
+        EaseInCost(previousCost, nextCost, upgrade);
+    }
+
+    private void EaseInCost(double fromCost, double toCost, UpgradesManager.Upgrade upgrade)
+    {
+        if (upgrade == null || upgrade.buttonText == null)
+        {
+            return;
+        }
+
+        if (costEaseCoroutine != null)
+        {
+            StopCoroutine(costEaseCoroutine);
+        }
+
+        costEaseCoroutine = StartCoroutine(EaseInCostRoutine(fromCost, toCost, upgrade));
+    }
+
+    private IEnumerator EaseInCostRoutine(double fromCost, double toCost, UpgradesManager.Upgrade upgrade)
+    {
+        bool usesMoney = IsMoneyUpgrade(upgrade);
+
+        if (costEaseDuration <= 0f)
+        {
+            upgrade.buttonText.text = FormatCostText(toCost, usesMoney);
+            yield break;
+        }
+
+        float elapsed = 0f;
+        while (elapsed < costEaseDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / costEaseDuration);
+            // Smoothstep gives a simple ease-in/ease-out interpolation.
+            float easedT = t * t * (3f - 2f * t);
+            double value = Mathf.Lerp((float)fromCost, (float)toCost, easedT);
+            upgrade.buttonText.text = FormatCostText(value, usesMoney);
+            yield return null;
+        }
+
+        upgrade.buttonText.text = FormatCostText(toCost, usesMoney);
+        costEaseCoroutine = null;
+    }
+
+    private bool IsMoneyUpgrade(UpgradesManager.Upgrade upgrade)
+    {
+        // Mining upgrades and the first farming upgrade (GardenPlots) use money.
+        if (UpgradesManager.M_upgrades.Contains(upgrade))
+        {
+            return true;
+        }
+
+        return upgrade.name == "GardenPlots";
+    }
+
+    private string FormatCostText(double cost, bool usesMoney)
+    {
+        double flooredCost = System.Math.Floor(cost);
+        return usesMoney ? $"${flooredCost}" : $"{flooredCost} Apples";
     }
 }
