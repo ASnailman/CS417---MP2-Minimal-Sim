@@ -147,9 +147,9 @@ PlayerSettings:
   preloadedAssets:
   - {fileID: 11400000, guid: a84810fdfce48e7418d872098d5f512a, type: 2}
   - {fileID: -944628639613478452, guid: 22504d4780cb37f428f199f67aed10ab, type: 3}
-  - {fileID: -6705389173560469391, guid: 44d809598c5c8bb498fa4f1b68a300b8, type: 2}
-  - {fileID: 11400000, guid: fcf2a9841c195f94e8acaec66887840d, type: 2}
-  - {fileID: -3209993808960316953, guid: a0f33284cdaf35740b363d5d2e65130f, type: 2}
+  - {fileID: 11400000, guid: 83d6e49bea5122449bd046cfb17de40a, type: 2}
+  - {fileID: 8851002623833163228, guid: a0f33284cdaf35740b363d5d2e65130f, type: 2}
+  - {fileID: -1477491281034732511, guid: 44d809598c5c8bb498fa4f1b68a300b8, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -684,8 +684,8 @@ PlayerSettings:
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
   scriptingDefineSymbols:
-    Android: USE_INPUT_SYSTEM_POSE_CONTROL;USE_STICK_CONTROL_THUMBSTICKS
-    Standalone: USE_INPUT_SYSTEM_POSE_CONTROL;USE_STICK_CONTROL_THUMBSTICKS
+    Android: USE_INPUT_SYSTEM_POSE_CONTROL;USE_STICK_CONTROL_THUMBSTICKS;OVR_DISABLE_HAND_PINCH_BUTTON_MAPPING
+    Standalone: USE_INPUT_SYSTEM_POSE_CONTROL;USE_STICK_CONTROL_THUMBSTICKS;OVR_DISABLE_HAND_PINCH_BUTTON_MAPPING
     Windows Store Apps: USE_INPUT_SYSTEM_POSE_CONTROL;USE_STICK_CONTROL_THUMBSTICKS
   additionalCompilerArguments: {}
   platformArchitecture: {}

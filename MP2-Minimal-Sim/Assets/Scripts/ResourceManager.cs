@@ -13,6 +13,11 @@ public class ResourceManager : MonoBehaviour
     public TextMeshProUGUI waterText;
     public TextMeshProUGUI MiningBtnText;
     public EaseIn moneyTextEase;
+    public EaseIn tree1;
+    public EaseIn tree2;
+    public EaseIn tree3;
+    public EaseIn tree4;
+    public EaseIn tree5;
     public EaseIn mineTextEase;
 
     private void Awake()

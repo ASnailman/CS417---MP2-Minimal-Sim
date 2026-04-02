@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics;
+using System.Collections;
 
 public class TreeBehaviour : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class TreeBehaviour : MonoBehaviour
     public HapticImpulsePlayer rightHaptic;
 
     public TextMeshProUGUI UICanvasMessageText;
+    public bool isUnlocked = false;
 
     void Start()
     {
@@ -38,17 +40,45 @@ public class TreeBehaviour : MonoBehaviour
 
         // 2. Determine if this plot is unlocked
         int GardenPlotNumbers = UpgradesManager.F_upgrades[0].level;
-        bool isUnlocked = TreeID < GardenPlotNumbers;
+        isUnlocked = TreeID < GardenPlotNumbers;
 
-        // Apply visibility
         TreeInfo.enabled = isUnlocked;
         Renderer treeRenderer = GetComponent<Renderer>();
         if (treeRenderer != null) treeRenderer.enabled = isUnlocked;
+
+        // Apply visibility
+        // if (TreeID == 1) {
+        // }
+        // else if (TreeID == 2) {
+        //     if (ResourceManager.Instance.tree2 != null)
+        //     {
+        //         ResourceManager.Instance.tree2.Pulse();
+        //     }
+        // }
+        // else if (TreeID == 3) {
+        //     if (ResourceManager.Instance.tree3 != null)
+        //     {
+        //         ResourceManager.Instance.tree3.Pulse();
+        //     }
+        // }
+        // else if (TreeID == 4) {
+        //     if (ResourceManager.Instance.tree4 != null)
+        //     {
+        //         ResourceManager.Instance.tree4.Pulse();
+        //     }
+        // }
+        // else if (TreeID == 5) {
+        //     if (ResourceManager.Instance.tree5 != null)
+        //     {
+        //         ResourceManager.Instance.tree5.Pulse();
+        //     }
+        // }
 
         if (!isUnlocked)
         {
             growth = 0f;
             foreach (GameObject apple in apples) apple.SetActive(false);
+            
             return;
         }
 
@@ -63,6 +93,7 @@ public class TreeBehaviour : MonoBehaviour
         for (int i = 0; i < apples.Length; i++)
         {
             apples[i].SetActive(growth >= 0.2f + (i * 0.1f));
+            ResourceManager.Instance.tree1.Pulse();
         }
 
         // 5. Button Logic
@@ -135,4 +166,8 @@ public class TreeBehaviour : MonoBehaviour
 
     private void ClearMessage() => UICanvasMessageText.text = "";
     private void EnableWaterButton() => waterButton.interactable = true;
+
+    void Delay() {
+        TreeInfo.enabled = isUnlocked;
+    }
 }
