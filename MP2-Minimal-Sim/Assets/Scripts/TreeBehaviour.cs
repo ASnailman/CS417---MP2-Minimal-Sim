@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics;
 
 public class TreeBehaviour : MonoBehaviour
 {
@@ -15,6 +16,11 @@ public class TreeBehaviour : MonoBehaviour
 
     public Button waterButton;
     public Button harvestButton;
+
+    public AudioSource waterSound;
+    public AudioSource harvestSound;
+    public HapticImpulsePlayer leftHaptic;
+    public HapticImpulsePlayer rightHaptic;
 
     public TextMeshProUGUI UICanvasMessageText;
 
@@ -73,6 +79,13 @@ public class TreeBehaviour : MonoBehaviour
 
         if (ResourceManager.Instance.water >= 10f)
         {
+            if (waterSound != null) {
+                waterSound.volume = 0.5f;
+                waterSound.Play();
+            }
+            leftHaptic?.SendHapticImpulse(0.5f, 0.1f);
+            rightHaptic?.SendHapticImpulse(0.5f, 0.1f);
+
             ResourceManager.Instance.water -= 10f;
             float growthEffectiveness = UpgradesManager.F_upgrades[1].level * 0.1f + 1f;
             growth = Mathf.Clamp01(growth + (0.1f * growthEffectiveness));
@@ -94,6 +107,13 @@ public class TreeBehaviour : MonoBehaviour
     public void HarvestTree()
     {
         if (ResourceManager.Instance == null) return;
+
+        if (harvestSound != null) {
+            harvestSound.volume = 0.5f;
+            harvestSound.Play();
+        }
+        leftHaptic?.SendHapticImpulse(0.5f, 0.1f);
+        rightHaptic?.SendHapticImpulse(0.5f, 0.1f);
 
         float applesGained = (8 + UpgradesManager.F_upgrades[3].level) * growth * (1 + UpgradesManager.F_upgrades[3].level * 0.02f); 
         float harvestEffectiveness = 1 + UpgradesManager.Instance.TotalUpgradeLevel * 0.005f * UpgradesManager.F_upgrades[4].level;

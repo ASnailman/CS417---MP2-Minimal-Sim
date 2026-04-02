@@ -1,9 +1,14 @@
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics;
 
 public class UpgradeBtnClick : MonoBehaviour
 {
     bool moneyTutorialShown = false;
     bool appleTutorialShown = false;
+
+    public AudioSource clickSound;
+    public HapticImpulsePlayer leftHaptic;
+    public HapticImpulsePlayer rightHaptic;
 
     public void OnClick() //
     {
@@ -13,6 +18,14 @@ public class UpgradeBtnClick : MonoBehaviour
             Debug.LogWarning("Upgrades lists not yet initialized!");
             return;
         }
+
+        // Juicy Effect
+        if (clickSound != null) {
+            clickSound.volume = 0.5f;
+            clickSound.Play();
+        }
+        leftHaptic?.SendHapticImpulse(0.5f, 0.1f);
+        rightHaptic?.SendHapticImpulse(0.5f, 0.1f);
 
         string upgradeName = gameObject.name.Replace("Btn", ""); 
         Debug.Log("Button clicked: " + upgradeName);
