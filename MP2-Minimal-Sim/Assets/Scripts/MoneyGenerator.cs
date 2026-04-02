@@ -26,7 +26,7 @@ public class MoneyGenerator : MonoBehaviour
         return currentRate;
     }
 
-    void Update() //
+    void Update()
     {
         if (ResourceManager.Instance == null) return;
         double moneyGained = getCurrentRate() * Time.deltaTime;
@@ -36,15 +36,21 @@ public class MoneyGenerator : MonoBehaviour
         if (particles >= 1.0f) {
             TriggerParticle();
             particles = 0f;
+            if (ResourceManager.Instance.moneyTextEase != null)
+            {
+                ResourceManager.Instance.moneyTextEase.Pulse();
+            }
         }
+
     }
 
     void TriggerParticle()
     {
         if (moneyParticles != null) {
-            moneyParticles.Emit(5);
+            moneyParticles.Emit(1);
         }
-         if (moneySound != null) {
+        if (moneySound != null) {
+            moneySound.volume = 0.2f;
             moneySound.Play();
         }
         

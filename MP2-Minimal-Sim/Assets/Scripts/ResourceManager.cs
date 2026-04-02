@@ -11,8 +11,9 @@ public class ResourceManager : MonoBehaviour
     public TextMeshProUGUI moneyText;
     public TextMeshProUGUI appleText;
     public TextMeshProUGUI waterText;
-
     public TextMeshProUGUI MiningBtnText;
+    public EaseIn moneyTextEase;
+    public EaseIn mineTextEase;
 
     private void Awake()
     {

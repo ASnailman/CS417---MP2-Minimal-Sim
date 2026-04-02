@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics;
 
 public class MiningGainMoney : MonoBehaviour
 {
@@ -9,6 +10,11 @@ public class MiningGainMoney : MonoBehaviour
 
     public TextMeshProUGUI UICanvasMessageText;
     public Button mineButton;
+    public ParticleSystem moneyParticles;
+    public AudioSource moneySound;
+    public HapticImpulsePlayer leftHaptic;
+    public HapticImpulsePlayer rightHaptic;
+    private float particles = 0f;
 
     private void Awake()
     {
@@ -48,6 +54,11 @@ public class MiningGainMoney : MonoBehaviour
         }
 
         ResourceManager.Instance.totalMoney += moneyGained;
+        TriggerParticle();
+        if (ResourceManager.Instance.mineTextEase != null)
+        {
+            ResourceManager.Instance.mineTextEase.Pulse();
+        }
         mineButton.interactable = false; 
         Invoke(nameof(EnableMineButton), 0.5f);
 
@@ -57,6 +68,19 @@ public class MiningGainMoney : MonoBehaviour
             UICanvasMessageText.color = Color.yellow;
             Invoke(nameof(ClearMessage), 1.0f);
         }
+    }
+
+    void TriggerParticle()
+    {
+        if (moneyParticles != null) {
+            moneyParticles.Emit(1);
+        }
+        if (moneySound != null) {
+            moneySound.volume = 1f;
+            moneySound.Play();
+        }
+        leftHaptic?.SendHapticImpulse(0.5f, 0.1f);
+        rightHaptic?.SendHapticImpulse(0.5f, 0.1f);
     }
 
     private void EnableMineButton() => mineButton.interactable = true;
