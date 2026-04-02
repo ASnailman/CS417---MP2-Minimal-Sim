@@ -3270,16 +3270,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 180278507}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7951c64acb0fa62458bf30a60089fe2d, type: 3}
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.UI.TrackedDeviceGraphicRaycaster
-  m_IgnoreReversedGraphics: 0
-  m_CheckFor2DOcclusion: 0
-  m_CheckFor3DOcclusion: 0
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RaycastTriggerInteraction: 0
 --- !u!1001 &181978991
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10812,16 +10810,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 491900539}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7951c64acb0fa62458bf30a60089fe2d, type: 3}
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.UI.TrackedDeviceGraphicRaycaster
-  m_IgnoreReversedGraphics: 0
-  m_CheckFor2DOcclusion: 0
-  m_CheckFor3DOcclusion: 0
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RaycastTriggerInteraction: 0
 --- !u!1001 &493824210
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14729,6 +14725,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.0000002, y: 0.9999998, z: 2.0000002}
   m_Center: {x: -0.00000011920929, y: 0.4999999, z: 0.00000011920929}
+--- !u!198 &614530237 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3178962850428046124, guid: 72b05015c31b1714b908339259f18694, type: 3}
+  m_PrefabInstance: {fileID: 715095798153282646}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &625976401
 GameObject:
   m_ObjectHideFlags: 0
@@ -16125,15 +16126,16 @@ MonoBehaviour:
   - {fileID: 864199940}
   - {fileID: 397630271}
   - {fileID: 191980723}
-  mainCamera: {fileID: 0}
+  mainCamera: {fileID: 1038240269}
   TreeInfo: {fileID: 180278509}
   GrowthPercentage: {fileID: 1691522335}
   waterButton: {fileID: 1649990069}
   harvestButton: {fileID: 1876844564}
-  waterSound: {fileID: 0}
-  harvestSound: {fileID: 0}
-  leftHaptic: {fileID: 0}
-  rightHaptic: {fileID: 0}
+  appleParticles: {fileID: 614530237}
+  waterSound: {fileID: 1818755331}
+  harvestSound: {fileID: 1657810529}
+  leftHaptic: {fileID: 1391300981}
+  rightHaptic: {fileID: 1391300980}
   UICanvasMessageText: {fileID: 1280088361}
 --- !u!65 &706047046
 BoxCollider:
@@ -16715,15 +16717,16 @@ MonoBehaviour:
   - {fileID: 1662490165}
   - {fileID: 1097951943}
   - {fileID: 511489919}
-  mainCamera: {fileID: 0}
+  mainCamera: {fileID: 1038240269}
   TreeInfo: {fileID: 491900545}
   GrowthPercentage: {fileID: 2056409976}
   waterButton: {fileID: 1837014079}
   harvestButton: {fileID: 1320329909}
-  waterSound: {fileID: 0}
-  harvestSound: {fileID: 0}
-  leftHaptic: {fileID: 0}
-  rightHaptic: {fileID: 0}
+  appleParticles: {fileID: 614530237}
+  waterSound: {fileID: 1818755331}
+  harvestSound: {fileID: 1657810529}
+  leftHaptic: {fileID: 1391300981}
+  rightHaptic: {fileID: 1391300980}
   UICanvasMessageText: {fileID: 1280088361}
 --- !u!1001 &737447962
 PrefabInstance:
@@ -17188,16 +17191,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 754204658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7951c64acb0fa62458bf30a60089fe2d, type: 3}
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.UI.TrackedDeviceGraphicRaycaster
-  m_IgnoreReversedGraphics: 0
-  m_CheckFor2DOcclusion: 0
-  m_CheckFor3DOcclusion: 0
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RaycastTriggerInteraction: 0
 --- !u!1 &759966354 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6111828532640439229, guid: 4708f045a6294a246a0a8b6018b6b0f5, type: 3}
@@ -17890,15 +17891,16 @@ MonoBehaviour:
   - {fileID: 1039072199}
   - {fileID: 61013851}
   - {fileID: 254529289}
-  mainCamera: {fileID: 0}
+  mainCamera: {fileID: 1038240269}
   TreeInfo: {fileID: 1073847496}
   GrowthPercentage: {fileID: 1487802581}
   waterButton: {fileID: 709006863}
   harvestButton: {fileID: 627391509}
-  waterSound: {fileID: 0}
-  harvestSound: {fileID: 0}
-  leftHaptic: {fileID: 0}
-  rightHaptic: {fileID: 0}
+  appleParticles: {fileID: 614530237}
+  waterSound: {fileID: 1818755331}
+  harvestSound: {fileID: 1657810529}
+  leftHaptic: {fileID: 1391300981}
+  rightHaptic: {fileID: 1391300980}
   UICanvasMessageText: {fileID: 1280088361}
 --- !u!65 &791991113
 BoxCollider:
@@ -20616,7 +20618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 413ccf18b61154e43843609cbf3e34dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AchievementManager
-  achievementPopupPanel: {fileID: 1815434179}
+  achievementPopupPanel: {fileID: 667962559}
   achievementPopupText: {fileID: 1266657560}
   achievementListText: {fileID: 726408279}
   achievementConfetti: {fileID: 915430081}
@@ -28199,16 +28201,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1073847494}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7951c64acb0fa62458bf30a60089fe2d, type: 3}
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.UI.TrackedDeviceGraphicRaycaster
-  m_IgnoreReversedGraphics: 0
-  m_CheckFor2DOcclusion: 0
-  m_CheckFor3DOcclusion: 0
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RaycastTriggerInteraction: 0
 --- !u!1 &1074333668
 GameObject:
   m_ObjectHideFlags: 0
@@ -34864,16 +34864,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1382302897}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7951c64acb0fa62458bf30a60089fe2d, type: 3}
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.UI.TrackedDeviceGraphicRaycaster
-  m_IgnoreReversedGraphics: 0
-  m_CheckFor2DOcclusion: 0
-  m_CheckFor3DOcclusion: 0
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RaycastTriggerInteraction: 0
 --- !u!1001 &1391300979
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40128,6 +40126,135 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1806541871}
   m_SourcePrefab: {fileID: 100100000, guid: 9e6f700af267f404d816efb4a23a0488, type: 3}
+--- !u!1 &1657810527
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1657810528}
+  - component: {fileID: 1657810529}
+  m_Layer: 0
+  m_Name: Harvesting Audio Source
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1657810528
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1657810527}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2083536635}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1657810529
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1657810527}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 445f65a83e5054e418a71d8f36c73004, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 1
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 0.5
+  MaxDistance: 3.5
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &1658940173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42858,15 +42985,16 @@ MonoBehaviour:
   - {fileID: 663758026}
   - {fileID: 1337706180}
   - {fileID: 1529081357}
-  mainCamera: {fileID: 0}
+  mainCamera: {fileID: 1038240269}
   TreeInfo: {fileID: 754204660}
   GrowthPercentage: {fileID: 1287506465}
   waterButton: {fileID: 1707192386}
   harvestButton: {fileID: 368066436}
-  waterSound: {fileID: 0}
-  harvestSound: {fileID: 0}
-  leftHaptic: {fileID: 0}
-  rightHaptic: {fileID: 0}
+  appleParticles: {fileID: 614530237}
+  waterSound: {fileID: 1818755331}
+  harvestSound: {fileID: 1657810529}
+  leftHaptic: {fileID: 1391300981}
+  rightHaptic: {fileID: 1391300980}
   UICanvasMessageText: {fileID: 1280088361}
 --- !u!65 &1806541872
 BoxCollider:
@@ -43143,6 +43271,135 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1815434179}
   m_CullTransparentMesh: 1
+--- !u!1 &1818755329
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1818755330}
+  - component: {fileID: 1818755331}
+  m_Layer: 0
+  m_Name: Watering Audio Source
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1818755330
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818755329}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2083536635}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1818755331
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818755329}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 6028c10be1afe004aa68e05e5b3d1fd9, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 1
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 0.5
+  MaxDistance: 3
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &1819464518
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48609,6 +48866,8 @@ Transform:
   - {fileID: 851828861}
   - {fileID: 2004509251}
   - {fileID: 1663316605}
+  - {fileID: 1818755330}
+  - {fileID: 1657810528}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2085323916
@@ -49407,15 +49666,16 @@ MonoBehaviour:
   - {fileID: 410252032}
   - {fileID: 2017929434}
   - {fileID: 246268236}
-  mainCamera: {fileID: 0}
+  mainCamera: {fileID: 1038240269}
   TreeInfo: {fileID: 1382302899}
   GrowthPercentage: {fileID: 2113262590}
   waterButton: {fileID: 1951568083}
   harvestButton: {fileID: 955899049}
-  waterSound: {fileID: 0}
-  harvestSound: {fileID: 0}
-  leftHaptic: {fileID: 0}
-  rightHaptic: {fileID: 0}
+  appleParticles: {fileID: 614530237}
+  waterSound: {fileID: 1818755331}
+  harvestSound: {fileID: 1657810529}
+  leftHaptic: {fileID: 1391300981}
+  rightHaptic: {fileID: 1391300980}
   UICanvasMessageText: {fileID: 1280088361}
 --- !u!65 &2127229949
 BoxCollider:
