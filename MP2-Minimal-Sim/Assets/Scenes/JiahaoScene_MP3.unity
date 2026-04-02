@@ -1815,6 +1815,7 @@ GameObject:
   - component: {fileID: 116846160}
   - component: {fileID: 116846162}
   - component: {fileID: 116846161}
+  - component: {fileID: 116846163}
   m_Layer: 0
   m_Name: MoneyTutorialPanel
   m_TagString: Untagged
@@ -1880,6 +1881,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116846159}
   m_CullTransparentMesh: 1
+--- !u!114 &116846163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116846159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 930c190cbc1cc714c96ef670dc7d18bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EaseIn
+  k: 8
 --- !u!1 &118231392 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6002584077004448247, guid: 9e6f700af267f404d816efb4a23a0488, type: 3}
@@ -5860,7 +5874,7 @@ Canvas:
   m_GameObject: {fileID: 283651954}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 1038240269}
   m_PlaneDistance: 5
   m_PixelPerfect: 0
@@ -13583,6 +13597,7 @@ Transform:
   - {fileID: 361689920}
   - {fileID: 1594363272}
   - {fileID: 945958318}
+  - {fileID: 915430083}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &575215672
@@ -15453,6 +15468,7 @@ GameObject:
   - component: {fileID: 667962560}
   - component: {fileID: 667962562}
   - component: {fileID: 667962561}
+  - component: {fileID: 667962563}
   m_Layer: 0
   m_Name: AchievementPopupPanel
   m_TagString: Untagged
@@ -15518,6 +15534,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 667962559}
   m_CullTransparentMesh: 1
+--- !u!114 &667962563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667962559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 930c190cbc1cc714c96ef670dc7d18bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EaseIn
+  k: 8
 --- !u!1 &669339708 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9039153835403920418, guid: ca1b282ca28562e4789001b81c17e1ed, type: 3}
@@ -16101,6 +16130,10 @@ MonoBehaviour:
   GrowthPercentage: {fileID: 1691522335}
   waterButton: {fileID: 1649990069}
   harvestButton: {fileID: 1876844564}
+  waterSound: {fileID: 0}
+  harvestSound: {fileID: 0}
+  leftHaptic: {fileID: 0}
+  rightHaptic: {fileID: 0}
   UICanvasMessageText: {fileID: 1280088361}
 --- !u!65 &706047046
 BoxCollider:
@@ -16687,6 +16720,10 @@ MonoBehaviour:
   GrowthPercentage: {fileID: 2056409976}
   waterButton: {fileID: 1837014079}
   harvestButton: {fileID: 1320329909}
+  waterSound: {fileID: 0}
+  harvestSound: {fileID: 0}
+  leftHaptic: {fileID: 0}
+  rightHaptic: {fileID: 0}
   UICanvasMessageText: {fileID: 1280088361}
 --- !u!1001 &737447962
 PrefabInstance:
@@ -17858,6 +17895,10 @@ MonoBehaviour:
   GrowthPercentage: {fileID: 1487802581}
   waterButton: {fileID: 709006863}
   harvestButton: {fileID: 627391509}
+  waterSound: {fileID: 0}
+  harvestSound: {fileID: 0}
+  leftHaptic: {fileID: 0}
+  rightHaptic: {fileID: 0}
   UICanvasMessageText: {fileID: 1280088361}
 --- !u!65 &791991113
 BoxCollider:
@@ -20076,6 +20117,97 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2004777055}
   m_SourcePrefab: {fileID: 100100000, guid: bd60a5db143ac5346a0c4ce719a0baea, type: 3}
+--- !u!1001 &915430080
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 573714646}
+    m_Modifications:
+    - target: {fileID: 4126359638490815777, guid: 77cddf39b775be645a02d57fc0347afb, type: 3}
+      propertyPath: m_Name
+      value: AchievementConfetti
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126359638490815777, guid: 77cddf39b775be645a02d57fc0347afb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126359638490815777, guid: 77cddf39b775be645a02d57fc0347afb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126359638490815804, guid: 77cddf39b775be645a02d57fc0347afb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.55453
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126359638490815804, guid: 77cddf39b775be645a02d57fc0347afb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 11.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126359638490815804, guid: 77cddf39b775be645a02d57fc0347afb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.54379
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126359638490815804, guid: 77cddf39b775be645a02d57fc0347afb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126359638490815804, guid: 77cddf39b775be645a02d57fc0347afb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126359638490815804, guid: 77cddf39b775be645a02d57fc0347afb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126359638490815804, guid: 77cddf39b775be645a02d57fc0347afb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126359638490815804, guid: 77cddf39b775be645a02d57fc0347afb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126359638490815804, guid: 77cddf39b775be645a02d57fc0347afb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126359638490815804, guid: 77cddf39b775be645a02d57fc0347afb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126359638490815806, guid: 77cddf39b775be645a02d57fc0347afb, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126359638490815807, guid: 77cddf39b775be645a02d57fc0347afb, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126359638490815807, guid: 77cddf39b775be645a02d57fc0347afb, type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126359638490815807, guid: 77cddf39b775be645a02d57fc0347afb, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 77cddf39b775be645a02d57fc0347afb, type: 3}
+--- !u!198 &915430081 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4126359638490815807, guid: 77cddf39b775be645a02d57fc0347afb, type: 3}
+  m_PrefabInstance: {fileID: 915430080}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &915430083 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4126359638490815804, guid: 77cddf39b775be645a02d57fc0347afb, type: 3}
+  m_PrefabInstance: {fileID: 915430080}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &917400566
 GameObject:
   m_ObjectHideFlags: 0
@@ -20487,10 +20619,10 @@ MonoBehaviour:
   achievementPopupPanel: {fileID: 1815434179}
   achievementPopupText: {fileID: 1266657560}
   achievementListText: {fileID: 726408279}
-  achievementConfetti: {fileID: 0}
-  popupEase: {fileID: 0}
-  leftHaptic: {fileID: 0}
-  rightHaptic: {fileID: 0}
+  achievementConfetti: {fileID: 915430081}
+  popupEase: {fileID: 667962563}
+  leftHaptic: {fileID: 1391300981}
+  rightHaptic: {fileID: 1391300980}
   moneyGoal: 100
   appleGoal: 100
   winUpgradeGoal: 10
@@ -37878,6 +38010,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4b54b5b39d019144b4e9a86bb3910c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RefillWater
+  refillWaterSound: {fileID: 0}
+  leftHaptic: {fileID: 0}
+  rightHaptic: {fileID: 0}
 --- !u!114 &1553063987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41019,61 +41154,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -0.14}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1712864932
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1712864934}
-  - component: {fileID: 1712864933}
-  m_Layer: 0
-  m_Name: AchievementManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1712864933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1712864932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 413ccf18b61154e43843609cbf3e34dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AchievementManager
-  achievementPopupPanel: {fileID: 667962559}
-  achievementPopupText: {fileID: 525415270}
-  achievementListText: {fileID: 726408279}
-  achievementConfetti: {fileID: 0}
-  popupEase: {fileID: 0}
-  leftHaptic: {fileID: 0}
-  rightHaptic: {fileID: 0}
-  moneyGoal: 100
-  appleGoal: 100
-  winUpgradeGoal: 5
-  speedrunTimeLimit: 300
---- !u!4 &1712864934
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1712864932}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 827.937, y: 343.64423, z: -56.4906}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1714228773
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42783,6 +42863,10 @@ MonoBehaviour:
   GrowthPercentage: {fileID: 1287506465}
   waterButton: {fileID: 1707192386}
   harvestButton: {fileID: 368066436}
+  waterSound: {fileID: 0}
+  harvestSound: {fileID: 0}
+  leftHaptic: {fileID: 0}
+  rightHaptic: {fileID: 0}
   UICanvasMessageText: {fileID: 1280088361}
 --- !u!65 &1806541872
 BoxCollider:
@@ -44309,6 +44393,7 @@ GameObject:
   - component: {fileID: 1884832262}
   - component: {fileID: 1884832264}
   - component: {fileID: 1884832263}
+  - component: {fileID: 1884832265}
   m_Layer: 0
   m_Name: AppleTutorialPanel
   m_TagString: Untagged
@@ -44374,6 +44459,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1884832261}
   m_CullTransparentMesh: 1
+--- !u!114 &1884832265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884832261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 930c190cbc1cc714c96ef670dc7d18bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EaseIn
+  k: 8
 --- !u!1 &1885344439 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9039153835403920418, guid: ca1b282ca28562e4789001b81c17e1ed, type: 3}
@@ -49135,9 +49233,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TutorialManager
   moneyTutorialPanel: {fileID: 116846159}
   appleTutorialPanel: {fileID: 1884832261}
-  moneyTutorialEase: {fileID: 0}
-  appleTutorialEase: {fileID: 0}
-  tutorialSound: {fileID: 0}
+  moneyTutorialEase: {fileID: 1884832265}
+  appleTutorialEase: {fileID: 116846163}
+  tutorialSound: {fileID: 1663316604}
   autoHideDelay: 3.5
 --- !u!4 &2121038580
 Transform:
@@ -49314,6 +49412,10 @@ MonoBehaviour:
   GrowthPercentage: {fileID: 2113262590}
   waterButton: {fileID: 1951568083}
   harvestButton: {fileID: 955899049}
+  waterSound: {fileID: 0}
+  harvestSound: {fileID: 0}
+  leftHaptic: {fileID: 0}
+  rightHaptic: {fileID: 0}
   UICanvasMessageText: {fileID: 1280088361}
 --- !u!65 &2127229949
 BoxCollider:
@@ -49764,7 +49866,6 @@ SceneRoots:
   - {fileID: 663114118}
   - {fileID: 1128308382}
   - {fileID: 2121038580}
-  - {fileID: 1712864934}
   - {fileID: 945945065}
   - {fileID: 573714646}
   - {fileID: 2083536635}

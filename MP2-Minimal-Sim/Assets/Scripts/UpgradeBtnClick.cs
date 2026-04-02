@@ -74,6 +74,13 @@ public class UpgradeBtnClick : MonoBehaviour
                     if (tutorial != null) tutorial.ShowMoneyTutorial();
                     moneyTutorialShown = true;
                 }
+                // Tutorial trigger for apple growth upgrades
+                if (upgrade.name == "GardenPlots" && upgrade.level == 1 && !appleTutorialShown)
+                {
+                    var tutorial = FindFirstObjectByType<TutorialManager>();
+                    if (tutorial != null) tutorial.ShowAppleTutorial();
+                    appleTutorialShown = true;
+                }
             }
         }
         else
@@ -83,13 +90,6 @@ public class UpgradeBtnClick : MonoBehaviour
                 ResourceManager.Instance.totalApples -= (int)cost;
                 FinalizeUpgrade(upgrade);
 
-                // Tutorial trigger for apple growth upgrades
-                if (upgrade.name == "GardenPlots" && upgrade.level == 1 && !appleTutorialShown)
-                {
-                    var tutorial = FindFirstObjectByType<TutorialManager>();
-                    if (tutorial != null) tutorial.ShowAppleTutorial();
-                    appleTutorialShown = true;
-                }
             }
         }
     }

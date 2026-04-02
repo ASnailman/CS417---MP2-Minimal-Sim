@@ -17,6 +17,8 @@ public class TreeBehaviour : MonoBehaviour
     public Button waterButton;
     public Button harvestButton;
 
+    public ParticleSystem appleParticles;
+
     public AudioSource waterSound;
     public AudioSource harvestSound;
     public HapticImpulsePlayer leftHaptic;
@@ -79,10 +81,6 @@ public class TreeBehaviour : MonoBehaviour
 
         if (ResourceManager.Instance.water >= 10f)
         {
-            if (waterSound != null) {
-                waterSound.volume = 0.5f;
-                waterSound.Play();
-            }
             leftHaptic?.SendHapticImpulse(0.5f, 0.1f);
             rightHaptic?.SendHapticImpulse(0.5f, 0.1f);
 
@@ -92,6 +90,12 @@ public class TreeBehaviour : MonoBehaviour
             
             waterButton.interactable = false;
             Invoke(nameof(EnableWaterButton), 0.5f);
+            if(waterSound != null)
+            {
+                waterSound.transform.position = transform.position; // Move sound to tree position
+                waterSound.volume = 1f;
+                waterSound.Play();
+            }
         }
         else
         {
@@ -109,7 +113,8 @@ public class TreeBehaviour : MonoBehaviour
         if (ResourceManager.Instance == null) return;
 
         if (harvestSound != null) {
-            harvestSound.volume = 0.5f;
+            harvestSound.transform.position = transform.position; // Move sound to tree position
+            harvestSound.volume = 1f;
             harvestSound.Play();
         }
         leftHaptic?.SendHapticImpulse(0.5f, 0.1f);
@@ -120,6 +125,12 @@ public class TreeBehaviour : MonoBehaviour
         
         ResourceManager.Instance.totalApples += Mathf.FloorToInt(applesGained * harvestEffectiveness);
         growth = 0f; 
+
+        if (appleParticles != null)
+        {
+            appleParticles.transform.position = transform.position;
+            appleParticles.Emit(1);
+        }
     }
 
     private void ClearMessage() => UICanvasMessageText.text = "";
