@@ -1,11 +1,20 @@
 using UnityEngine;
 using TMPro;
 
+using UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics;
+
 public class AchievementManager : MonoBehaviour
 {
     public GameObject achievementPopupPanel;
     public TextMeshProUGUI achievementPopupText;
     public TextMeshProUGUI achievementListText;
+    // particles
+    public ParticleSystem achievementConfetti;
+
+    public EaseIn popupEase;
+
+    public HapticImpulsePlayer leftHaptic;
+    public HapticImpulsePlayer rightHaptic;
 
     public int moneyGoal = 1000000;          
     public int appleGoal = 1000000;          
@@ -18,6 +27,8 @@ public class AchievementManager : MonoBehaviour
     private bool appleObsessionUnlocked = false;
 
     private string achievementList = "";
+
+    
 
     void Start()
     {
@@ -76,6 +87,19 @@ public class AchievementManager : MonoBehaviour
     {
         ShowPopup(achievementName);
         AddToAchievementList(achievementName);
+
+        //added for confetti
+        if (achievementConfetti != null)
+        {
+            achievementConfetti.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            achievementConfetti.Play();
+        }
+
+        if (popupEase != null)
+            popupEase.Pulse();
+
+        leftHaptic?.SendHapticImpulse(0.7f, 0.2f);
+        rightHaptic?.SendHapticImpulse(0.7f, 0.2f);
     }
 
     void ShowPopup(string achievementName)
